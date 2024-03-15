@@ -12,6 +12,10 @@ function Book(title, author, pages, read) {
 			(read ? "already read" : "not read yet")
 		);
 	};
+
+	this.toggleRead = function () {
+		this.read = this.read ? false : true;
+	};
 }
 
 function addBookToLibrary() {
@@ -26,6 +30,7 @@ function addBookToLibrary() {
 const display = document.querySelector("#display");
 const tableHeading = display.querySelector("thead");
 let removeBookButtons = display.querySelectorAll(".remove-book");
+let toggleReadButtons = display.querySelectorAll(".toggle-read");
 
 function displayLibrary() {
 	while (tableHeading.nextSibling) {
@@ -46,12 +51,16 @@ function displayLibrary() {
 		}
 
 		const removeBook = document.createElement("button");
-
 		removeBook.textContent = "Remove";
 		removeBook.value = i;
 		removeBook.classList.add("remove-book");
-
 		entry.appendChild(removeBook);
+
+		const readBook = document.createElement("button");
+		readBook.textContent = "Read";
+		readBook.value = i;
+		readBook.classList.add("toggle-read");
+		entry.appendChild(readBook);
 
 		display.appendChild(entry);
 	});
@@ -59,8 +68,16 @@ function displayLibrary() {
 	removeBookButtons = display.querySelectorAll(".remove-book");
 	removeBookButtons.forEach((removeButton) => {
 		removeButton.addEventListener("click", (e) => {
-			console.log("cock");
 			myLibrary.splice(e.target.value, 1);
+
+			displayLibrary();
+		});
+	});
+
+	toggleReadButtons = display.querySelectorAll(".toggle-read");
+	toggleReadButtons.forEach((readButton) => {
+		readButton.addEventListener("click", (e) => {
+			myLibrary.at(e.target.value).toggleRead();
 
 			displayLibrary();
 		});
