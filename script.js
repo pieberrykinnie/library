@@ -25,6 +25,7 @@ function addBookToLibrary() {
 
 const display = document.querySelector("#display");
 const tableHeading = display.querySelector("thead");
+let removeBookButtons = display.querySelectorAll(".remove-book");
 
 function displayLibrary() {
 	while (tableHeading.nextSibling) {
@@ -32,7 +33,7 @@ function displayLibrary() {
 		display.removeChild(tableRow);
 	}
 
-	myLibrary.forEach((book) => {
+	myLibrary.forEach((book, i) => {
 		const entry = document.createElement("tr");
 
 		for (attr in book) {
@@ -44,7 +45,25 @@ function displayLibrary() {
 			}
 		}
 
+		const removeBook = document.createElement("button");
+
+		removeBook.textContent = "Remove";
+		removeBook.value = i;
+		removeBook.classList.add("remove-book");
+
+		entry.appendChild(removeBook);
+
 		display.appendChild(entry);
+	});
+
+	removeBookButtons = display.querySelectorAll(".remove-book");
+	removeBookButtons.forEach((removeButton) => {
+		removeButton.addEventListener("click", (e) => {
+			console.log("cock");
+			myLibrary.splice(e.target.value, 1);
+
+			displayLibrary();
+		});
 	});
 }
 
@@ -71,6 +90,8 @@ submitButton.addEventListener("click", (e) => {
 	const bookRead = modal.querySelector("#book-read") === "True" ? true : false;
 
 	myLibrary.push(new Book(bookName, bookAuthor, bookPages, bookRead));
+
+	displayLibrary();
 
 	modal.close();
 });
