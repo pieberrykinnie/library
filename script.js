@@ -22,3 +22,28 @@ function addBookToLibrary() {
 
 	myLibrary.push(new Book(title, author, pages, read));
 }
+
+const display = document.querySelector("#display");
+const tableHeading = display.querySelector("thead");
+
+function displayLibrary() {
+	while (tableHeading.nextSibling) {
+		const tableRow = tableHeading.nextSibling;
+		display.removeChild(tableRow);
+	}
+
+	myLibrary.forEach((book) => {
+		const entry = document.createElement("tr");
+
+		for (attr in book) {
+			if (typeof book[attr] !== "function") {
+				const details = document.createElement("td");
+				details.textContent = book[attr];
+
+				entry.appendChild(details);
+			}
+		}
+
+		display.appendChild(entry);
+	});
+}
