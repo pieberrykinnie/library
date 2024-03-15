@@ -47,3 +47,30 @@ function displayLibrary() {
 		display.appendChild(entry);
 	});
 }
+
+const showDialog = document.querySelector("#show-dialog");
+const modal = document.querySelector("#show-dialog + dialog");
+
+const cancelButton = modal.querySelector("#cancel");
+const submitButton = modal.querySelector("#submit");
+
+showDialog.addEventListener("click", () => {
+	modal.showModal();
+});
+
+cancelButton.addEventListener("click", () => {
+	modal.close();
+});
+
+submitButton.addEventListener("click", (e) => {
+	e.preventDefault();
+
+	const bookName = modal.querySelector("#book-name").value;
+	const bookAuthor = modal.querySelector("#book-author").value;
+	const bookPages = modal.querySelector("#book-pages").value;
+	const bookRead = modal.querySelector("#book-read") === "True" ? true : false;
+
+	myLibrary.push(new Book(bookName, bookAuthor, bookPages, bookRead));
+
+	modal.close();
+});

@@ -16,6 +16,25 @@
 				<th>Read</th>
 			</thead>
 		</table>
+		<button type="button" id="show-dialog">ADD BOOK</button>
+		<dialog>
+			<form>
+				<label for="book-name">Title of the book:</label>
+				<input name="book-name" id="book-name" type="text" required />
+				<label for="book-author">Author of the book:</label>
+				<input name="book-author" id="book-author" type="text" required />
+				<label for="book-pages">Page count of the book:</label>
+				<input name="book-pages" id="book-pages" type="number" required />
+				<label for="book-read">Whether the book's been read:</label>
+				<select name="book-read" id="book-read" required>
+					<option value="true">True</option>
+					<option value="false">False</option>
+				</select>
+
+				<button id="cancel" type="button">Cancel</button>
+				<button id="submit" type="submit">Submit</button>
+			</form>
+		</dialog>
 		<script src="script.js"></script>
 	</body>
 </html>

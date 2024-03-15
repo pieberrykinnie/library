@@ -1,0 +1,19 @@
+dialog form {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 4px;
+}
+
+form button {
+    max-width: fit-content;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 8px;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 4px;
+}
